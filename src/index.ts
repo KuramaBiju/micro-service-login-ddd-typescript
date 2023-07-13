@@ -1,21 +1,20 @@
+import bodyParser from "body-parser";
+import cors from "cors";
+import dotenv from "dotenv";
+import express from "express";
+import helmet from "helmet";
 
-import express from 'express';
-import cors from 'cors';
-import dotenv from 'dotenv';
-import helmet from 'helmet';
-import bodyParser from 'body-parser';
-
-
-const app = express()
+const app = express();
 dotenv.config();
 
-app.use(bodyParser.json({limit: '25mb'}));
-app.use(cors({
-  origin: '*',
-  methods: ['POST','GET'],
-  allowedHeaders: ['Content-Type', 'Accept', 'auth-token', 'application']
-}));
-
+app.use(bodyParser.json({ limit: "25mb" }));
+app.use(
+	cors({
+		origin: "*",
+		methods: ["POST", "GET"],
+		allowedHeaders: ["Content-Type", "Accept", "auth-token", "application"],
+	})
+);
 
 app.use(helmet.contentSecurityPolicy());
 app.use(helmet.crossOriginEmbedderPolicy());
@@ -32,22 +31,21 @@ app.use(helmet.permittedCrossDomainPolicies());
 app.use(helmet.referrerPolicy());
 app.use(helmet.xssFilter());
 
-app.get('/', (req, res) => {
-    res.send('Hello World!');
+app.get("/", (req, res) => {
+	res.send("Hello World!");
 });
 
+const start = () => {
+	try {
+		// await connection.sync();
+		app.listen(process.env.PORT, () => {
+			// eslint-disable-next-line no-console
+			console.log(`Server started on port ${process.env.PORT ?? 3000}`);
+		});
+	} catch (error) {
+		console.error(error);
+		process.exit(1);
+	}
+};
 
-
-  const start = async (): Promise<void> => {
-    try {
-     // await connection.sync();
-      app.listen(process.env.PORT, () => {
-        console.log(`Server started on port ${process.env.PORT}`);
-      });
-    } catch (error) {
-      console.error(error);
-      process.exit(1);
-    }
-  };
-
-  void start();
+start();
