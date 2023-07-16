@@ -4,6 +4,9 @@ import dotenv from "dotenv";
 import express from "express";
 import helmet from "helmet";
 
+import sequelizeConnection from "./apps/backend/config/SequalizeConnection";
+import userRouter from "./apps/backend/routes/UserRouter";
+
 const app = express();
 dotenv.config();
 
@@ -31,13 +34,15 @@ app.use(helmet.permittedCrossDomainPolicies());
 app.use(helmet.referrerPolicy());
 app.use(helmet.xssFilter());
 
+app.use("/auth", userRouter);
+
 app.get("/", (req, res) => {
 	res.send("Hello World!");
 });
 
-const start = () => {
+const start = async (): Promise<void> => {
 	try {
-		// await connection.sync();
+		await sequelizeConnection.sync();
 		app.listen(process.env.PORT, () => {
 			// eslint-disable-next-line no-console
 			console.log(`Server started on port ${process.env.PORT ?? 3000}`);
@@ -48,4 +53,4 @@ const start = () => {
 	}
 };
 
-start();
+void start();
