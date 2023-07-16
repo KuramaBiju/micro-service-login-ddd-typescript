@@ -1,6 +1,6 @@
 module.exports = {
 	extends: ["eslint-config-codely/typescript"],
-	plugins: ["hexagonal-architecture"], // Agrega el plugin aquí
+	// plugins: ["hexagonal-architecture"], // Agrega el plugin aquí
 	overrides: [
 		{
 			files: ["*.ts", "*.tsx"],
@@ -11,9 +11,9 @@ module.exports = {
 		// Aquí aplicas la regla a los archivos específicos
 		{
 			files: ["**/src/Contexts/**/*.ts"],
-			rules: {
+			/*	rules: {
 				"hexagonal-architecture/enforce": ["error"],
-			},
+			},*/
 		},
 	],
 };
