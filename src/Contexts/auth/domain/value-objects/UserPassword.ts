@@ -2,9 +2,9 @@ export class UserPassword {
 	private readonly password: string;
 
 	constructor(value: string) {
-		this.ensurePasswordHasAtLeast8Characters(value);
-		this.ensurePasswordHasAtLeast1Number(value);
-		this.ensurePasswordHasAtLeast1SpecialCharacter(value);
+		this.ensurePasswordHasAtLeast6Characters(value);
+		//this.ensurePasswordHasAtLeast1Number(value);
+		//this.ensurePasswordHasAtLeast1SpecialCharacter(value);
 		this.password = value;
 	}
 
@@ -12,9 +12,9 @@ export class UserPassword {
 		return this.password;
 	}
 
-	private ensurePasswordHasAtLeast8Characters(password: string): void {
-		if (password.length < 8) {
-			throw new Error("Password should have at least 8 characters.");
+	private ensurePasswordHasAtLeast6Characters(password: string): void {
+		if (password.length < 6) {
+			throw new Error("Password should have at least 6 characters.");
 		}
 	}
 
