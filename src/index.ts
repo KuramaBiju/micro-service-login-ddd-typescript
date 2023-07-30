@@ -36,10 +36,6 @@ app.use(helmet.xssFilter());
 
 app.use("/auth", userRouter);
 
-app.get("/", (req, res) => {
-	res.send("Hello World!");
-});
-
 const start = async (): Promise<void> => {
 	try {
 		await sequelizeConnection.sync();
@@ -54,3 +50,5 @@ const start = async (): Promise<void> => {
 };
 
 void start();
+
+export default app;
